@@ -1,0 +1,836 @@
+kaira@nithin:~$ ipython
+Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 6.4.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import pandas as pd
+
+In [2]: import numpy as np
+
+In [3]: data=pd.read_csv('/home/kaira/Desktop/titanic.csv')
+
+In [4]: data.head()
+Out[4]: 
+   Unnamed: 0  survived  pclass     sex   age  sibsp  parch     fare embarked  class    who  adult_male deck  embark_town alive  alone
+0           0         0       3    male  22.0      1      0   7.2500        S  Third    man        True  NaN  Southampton    no  False
+1           1         1       1  female  38.0      1      0  71.2833        C  First  woman       False    C    Cherbourg   yes  False
+2           2         1       3  female  26.0      0      0   7.9250        S  Third  woman       False  NaN  Southampton   yes   True
+3           3         1       1  female  35.0      1      0  53.1000        S  First  woman       False    C  Southampton   yes  False
+4           4         0       3    male  35.0      0      0   8.0500        S  Third    man        True  NaN  Southampton    no   True
+
+In [5]: data.drop('Unnamed: 0',axis=1,inplace=True)
+
+In [6]: data.head()
+Out[6]: 
+   survived  pclass     sex   age  sibsp  parch     fare embarked  class    who  adult_male deck  embark_town alive  alone
+0         0       3    male  22.0      1      0   7.2500        S  Third    man        True  NaN  Southampton    no  False
+1         1       1  female  38.0      1      0  71.2833        C  First  woman       False    C    Cherbourg   yes  False
+2         1       3  female  26.0      0      0   7.9250        S  Third  woman       False  NaN  Southampton   yes   True
+3         1       1  female  35.0      1      0  53.1000        S  First  woman       False    C  Southampton   yes  False
+4         0       3    male  35.0      0      0   8.0500        S  Third    man        True  NaN  Southampton    no   True
+
+In [7]: alone=pd.get_dummies(data['alone'])
+
+In [8]: alone
+Out[8]: 
+     False  True 
+0        1      0
+1        1      0
+2        0      1
+3        1      0
+4        0      1
+5        0      1
+6        0      1
+7        1      0
+8        1      0
+9        1      0
+10       1      0
+11       0      1
+12       0      1
+13       1      0
+14       0      1
+15       0      1
+16       1      0
+17       0      1
+18       1      0
+19       0      1
+20       0      1
+21       0      1
+22       0      1
+23       0      1
+24       1      0
+25       1      0
+26       0      1
+27       1      0
+28       0      1
+29       0      1
+..     ...    ...
+861      1      0
+862      0      1
+863      1      0
+864      0      1
+865      0      1
+866      1      0
+867      0      1
+868      0      1
+869      1      0
+870      0      1
+871      1      0
+872      0      1
+873      0      1
+874      1      0
+875      0      1
+876      0      1
+877      0      1
+878      0      1
+879      1      0
+880      1      0
+881      0      1
+882      0      1
+883      0      1
+884      0      1
+885      1      0
+886      0      1
+887      0      1
+888      1      0
+889      0      1
+890      0      1
+
+[891 rows x 2 columns]
+
+In [9]: sex=pd.get_dummies(data['sex'])
+
+In [10]: sex
+Out[10]: 
+     female  male
+0         0     1
+1         1     0
+2         1     0
+3         1     0
+4         0     1
+5         0     1
+6         0     1
+7         0     1
+8         1     0
+9         1     0
+10        1     0
+11        1     0
+12        0     1
+13        0     1
+14        1     0
+15        1     0
+16        0     1
+17        0     1
+18        1     0
+19        1     0
+20        0     1
+21        0     1
+22        1     0
+23        0     1
+24        1     0
+25        1     0
+26        0     1
+27        0     1
+28        1     0
+29        0     1
+..      ...   ...
+861       0     1
+862       1     0
+863       1     0
+864       0     1
+865       1     0
+866       1     0
+867       0     1
+868       0     1
+869       0     1
+870       0     1
+871       1     0
+872       0     1
+873       0     1
+874       1     0
+875       1     0
+876       0     1
+877       0     1
+878       0     1
+879       1     0
+880       1     0
+881       0     1
+882       1     0
+883       0     1
+884       0     1
+885       1     0
+886       0     1
+887       1     0
+888       1     0
+889       0     1
+890       0     1
+
+[891 rows x 2 columns]
+
+In [11]: embarked=pd.get_dummies(data['embarked'])
+
+In [12]: emabrked
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-12-40c744baaf2b> in <module>()
+----> 1 emabrked
+
+NameError: name 'emabrked' is not defined
+
+In [13]: embarked
+Out[13]: 
+     C  Q  S
+0    0  0  1
+1    1  0  0
+2    0  0  1
+3    0  0  1
+4    0  0  1
+5    0  1  0
+6    0  0  1
+7    0  0  1
+8    0  0  1
+9    1  0  0
+10   0  0  1
+11   0  0  1
+12   0  0  1
+13   0  0  1
+14   0  0  1
+15   0  0  1
+16   0  1  0
+17   0  0  1
+18   0  0  1
+19   1  0  0
+20   0  0  1
+21   0  0  1
+22   0  1  0
+23   0  0  1
+24   0  0  1
+25   0  0  1
+26   1  0  0
+27   0  0  1
+28   0  1  0
+29   0  0  1
+..  .. .. ..
+861  0  0  1
+862  0  0  1
+863  0  0  1
+864  0  0  1
+865  0  0  1
+866  1  0  0
+867  0  0  1
+868  0  0  1
+869  0  0  1
+870  0  0  1
+871  0  0  1
+872  0  0  1
+873  0  0  1
+874  1  0  0
+875  1  0  0
+876  0  0  1
+877  0  0  1
+878  0  0  1
+879  1  0  0
+880  0  0  1
+881  0  0  1
+882  0  0  1
+883  0  0  1
+884  0  0  1
+885  0  1  0
+886  0  0  1
+887  0  0  1
+888  0  0  1
+889  1  0  0
+890  0  1  0
+
+[891 rows x 3 columns]
+
+In [14]: type(embarked)
+Out[14]: pandas.core.frame.DataFrame
+
+In [15]: embarked.drop('S',axis=1,inplace=True)
+
+In [16]: adult_male=pd.get_dummies(data['adult_male'])
+
+In [17]: data.drop(['embarked','sex','alone'],axis=1,inplace=True)
+
+In [18]: data.head()
+Out[18]: 
+   survived  pclass   age  sibsp  parch     fare  class    who  adult_male deck  embark_town alive
+0         0       3  22.0      1      0   7.2500  Third    man        True  NaN  Southampton    no
+1         1       1  38.0      1      0  71.2833  First  woman       False    C    Cherbourg   yes
+2         1       3  26.0      0      0   7.9250  Third  woman       False  NaN  Southampton   yes
+3         1       1  35.0      1      0  53.1000  First  woman       False    C  Southampton   yes
+4         0       3  35.0      0      0   8.0500  Third    man        True  NaN  Southampton    no
+
+In [19]: data.drop(['alive','adult_male',],axis=1,inplace=True)
+
+In [20]: data.head()
+Out[20]: 
+   survived  pclass   age  sibsp  parch     fare  class    who deck  embark_town
+0         0       3  22.0      1      0   7.2500  Third    man  NaN  Southampton
+1         1       1  38.0      1      0  71.2833  First  woman    C    Cherbourg
+2         1       3  26.0      0      0   7.9250  Third  woman  NaN  Southampton
+3         1       1  35.0      1      0  53.1000  First  woman    C  Southampton
+4         0       3  35.0      0      0   8.0500  Third    man  NaN  Southampton
+
+In [21]: data.drop(['embark_town','alive'],axis=1,inplace=True)
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-21-fbc329fb4e79> in <module>()
+----> 1 data.drop(['embark_town','alive'],axis=1,inplace=True)
+
+~/.local/lib/python3.6/site-packages/pandas/core/frame.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   3695                                            index=index, columns=columns,
+   3696                                            level=level, inplace=inplace,
+-> 3697                                            errors=errors)
+   3698 
+   3699     @rewrite_axis_style_signature('mapper', [('copy', True),
+
+~/.local/lib/python3.6/site-packages/pandas/core/generic.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   3109         for axis, labels in axes.items():
+   3110             if labels is not None:
+-> 3111                 obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+   3112 
+   3113         if inplace:
+
+~/.local/lib/python3.6/site-packages/pandas/core/generic.py in _drop_axis(self, labels, axis, level, errors)
+   3141                 new_axis = axis.drop(labels, level=level, errors=errors)
+   3142             else:
+-> 3143                 new_axis = axis.drop(labels, errors=errors)
+   3144             result = self.reindex(**{axis_name: new_axis})
+   3145 
+
+~/.local/lib/python3.6/site-packages/pandas/core/indexes/base.py in drop(self, labels, errors)
+   4402             if errors != 'ignore':
+   4403                 raise KeyError(
+-> 4404                     '{} not found in axis'.format(labels[mask]))
+   4405             indexer = indexer[~mask]
+   4406         return self.delete(indexer)
+
+KeyError: "['alive'] not found in axis"
+
+In [22]: data.drop(['embark_town'],axis=1,inplace=True)
+
+In [23]: data.head()
+Out[23]: 
+   survived  pclass   age  sibsp  parch     fare  class    who deck
+0         0       3  22.0      1      0   7.2500  Third    man  NaN
+1         1       1  38.0      1      0  71.2833  First  woman    C
+2         1       3  26.0      0      0   7.9250  Third  woman  NaN
+3         1       1  35.0      1      0  53.1000  First  woman    C
+4         0       3  35.0      0      0   8.0500  Third    man  NaN
+
+In [24]: titanic=data.head()
+
+In [25]: titanic=data.copy()
+
+In [26]: data.drop(['who','deck','class'],axis=1,inplace=True)
+
+In [27]: data.head()
+Out[27]: 
+   survived  pclass   age  sibsp  parch     fare
+0         0       3  22.0      1      0   7.2500
+1         1       1  38.0      1      0  71.2833
+2         1       3  26.0      0      0   7.9250
+3         1       1  35.0      1      0  53.1000
+4         0       3  35.0      0      0   8.0500
+
+In [28]: data=pd.concat([data,embarked,sex,alone],axis=1,inplace=True)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-28-33a76fe866fd> in <module>()
+----> 1 data=pd.concat([data,embarked,sex,alone],axis=1,inplace=True)
+
+TypeError: concat() got an unexpected keyword argument 'inplace'
+
+In [29]: data=pd.concat([data,embarked,sex,alone],axis=1)
+
+In [30]: data.head()
+Out[30]: 
+   survived  pclass   age  sibsp  parch     fare  C  Q  female  male  False  True
+0         0       3  22.0      1      0   7.2500  0  0       0     1      1     0
+1         1       1  38.0      1      0  71.2833  1  0       1     0      1     0
+2         1       3  26.0      0      0   7.9250  0  0       1     0      0     1
+3         1       1  35.0      1      0  53.1000  0  0       1     0      1     0
+4         0       3  35.0      0      0   8.0500  0  0       0     1      0     1
+
+In [31]: X=data.drop('survived',axis=1)
+
+In [32]: X.head()
+Out[32]: 
+   pclass   age  sibsp  parch     fare  C  Q  female  male  False  True
+0       3  22.0      1      0   7.2500  0  0       0     1      1     0
+1       1  38.0      1      0  71.2833  1  0       1     0      1     0
+2       3  26.0      0      0   7.9250  0  0       1     0      0     1
+3       1  35.0      1      0  53.1000  0  0       1     0      1     0
+4       3  35.0      0      0   8.0500  0  0       0     1      0     1
+
+In [33]: y=data['survived']
+
+In [34]: data.isnull().any()
+Out[34]: 
+survived    False
+pclass      False
+age          True
+sibsp       False
+parch       False
+fare        False
+C           False
+Q           False
+female      False
+male        False
+False       False
+True        False
+dtype: bool
+
+In [35]: data.isnull().sum()
+Out[35]: 
+survived      0
+pclass        0
+age         177
+sibsp         0
+parch         0
+fare          0
+C             0
+Q             0
+female        0
+male          0
+False         0
+True          0
+dtype: int64
+
+In [36]: data.shape
+Out[36]: (891, 12)
+
+In [37]: ages=data['age'].mean()
+
+In [38]: ages
+Out[38]: 29.69911764705882
+
+In [39]: data1=data.copy()
+
+In [40]: data1['age'].fillna(ages)
+Out[40]: 
+0      22.000000
+1      38.000000
+2      26.000000
+3      35.000000
+4      35.000000
+5      29.699118
+6      54.000000
+7       2.000000
+8      27.000000
+9      14.000000
+10      4.000000
+11     58.000000
+12     20.000000
+13     39.000000
+14     14.000000
+15     55.000000
+16      2.000000
+17     29.699118
+18     31.000000
+19     29.699118
+20     35.000000
+21     34.000000
+22     15.000000
+23     28.000000
+24      8.000000
+25     38.000000
+26     29.699118
+27     19.000000
+28     29.699118
+29     29.699118
+         ...    
+861    21.000000
+862    48.000000
+863    29.699118
+864    24.000000
+865    42.000000
+866    27.000000
+867    31.000000
+868    29.699118
+869     4.000000
+870    26.000000
+871    47.000000
+872    33.000000
+873    47.000000
+874    28.000000
+875    15.000000
+876    20.000000
+877    19.000000
+878    29.699118
+879    56.000000
+880    25.000000
+881    33.000000
+882    22.000000
+883    28.000000
+884    25.000000
+885    39.000000
+886    27.000000
+887    19.000000
+888    29.699118
+889    26.000000
+890    32.000000
+Name: age, Length: 891, dtype: float64
+
+In [41]: data1['age'].fillna(ages,inplace=True)
+
+In [42]: data1.isnull().sum()
+Out[42]: 
+survived    0
+pclass      0
+age         0
+sibsp       0
+parch       0
+fare        0
+C           0
+Q           0
+female      0
+male        0
+False       0
+True        0
+dtype: int64
+
+In [43]: from sklearn.linear_model import LogisticRegression
+
+In [44]: model=LogisticRegression()
+
+In [45]: X=data1.drop('survived',axis=1,inplace=True)
+
+In [46]: X.head()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-46-ae5cd47bda90> in <module>()
+----> 1 X.head()
+
+AttributeError: 'NoneType' object has no attribute 'head'
+
+In [47]: X
+
+In [48]: data1.head()
+Out[48]: 
+   pclass   age  sibsp  parch     fare  C  Q  female  male  False  True
+0       3  22.0      1      0   7.2500  0  0       0     1      1     0
+1       1  38.0      1      0  71.2833  1  0       1     0      1     0
+2       3  26.0      0      0   7.9250  0  0       1     0      0     1
+3       1  35.0      1      0  53.1000  0  0       1     0      1     0
+4       3  35.0      0      0   8.0500  0  0       0     1      0     1
+
+In [49]: X=data1.drop('survived',axis=1)
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-49-48a54e465666> in <module>()
+----> 1 X=data1.drop('survived',axis=1)
+
+~/.local/lib/python3.6/site-packages/pandas/core/frame.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   3695                                            index=index, columns=columns,
+   3696                                            level=level, inplace=inplace,
+-> 3697                                            errors=errors)
+   3698 
+   3699     @rewrite_axis_style_signature('mapper', [('copy', True),
+
+~/.local/lib/python3.6/site-packages/pandas/core/generic.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   3109         for axis, labels in axes.items():
+   3110             if labels is not None:
+-> 3111                 obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+   3112 
+   3113         if inplace:
+
+~/.local/lib/python3.6/site-packages/pandas/core/generic.py in _drop_axis(self, labels, axis, level, errors)
+   3141                 new_axis = axis.drop(labels, level=level, errors=errors)
+   3142             else:
+-> 3143                 new_axis = axis.drop(labels, errors=errors)
+   3144             result = self.reindex(**{axis_name: new_axis})
+   3145 
+
+~/.local/lib/python3.6/site-packages/pandas/core/indexes/base.py in drop(self, labels, errors)
+   4402             if errors != 'ignore':
+   4403                 raise KeyError(
+-> 4404                     '{} not found in axis'.format(labels[mask]))
+   4405             indexer = indexer[~mask]
+   4406         return self.delete(indexer)
+
+KeyError: "['survived'] not found in axis"
+
+In [50]: X=data1.copy()
+
+In [51]: X.head()
+Out[51]: 
+   pclass   age  sibsp  parch     fare  C  Q  female  male  False  True
+0       3  22.0      1      0   7.2500  0  0       0     1      1     0
+1       1  38.0      1      0  71.2833  1  0       1     0      1     0
+2       3  26.0      0      0   7.9250  0  0       1     0      0     1
+3       1  35.0      1      0  53.1000  0  0       1     0      1     0
+4       3  35.0      0      0   8.0500  0  0       0     1      0     1
+
+In [52]: x.shape
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-52-9f2b259887ef> in <module>()
+----> 1 x.shape
+
+NameError: name 'x' is not defined
+
+In [53]: X.shape
+Out[53]: (891, 11)
+
+In [54]: y.shape
+Out[54]: (891,)
+
+In [55]: from sklearn.model_selection import train_test_split
+
+In [56]: X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=0,test_size=0.33)
+
+In [57]: model.fit(X_train,y_train)
+Out[57]: 
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+
+In [58]: import pickle
+
+In [59]: with open('titanic.txt','wb') as f:
+    ...:     pickle.dump(model,f)
+    ...:     
+
+In [60]: with open('Desktop/titanic.txt','wb') as f:
+    ...:     pickle.dump(model,f)
+    ...:     
+    ...:     
+
+In [61]: y_model=model.predict(X_test)
+
+In [62]: from sklearn.metrics import accuracy_score
+
+In [63]: accuracy_score(y_model,y_test)
+Out[63]: 0.7966101694915254
+
+In [64]: accuracy_score(y_model,y_test)
+Out[64]: 0.7966101694915254
+
+In [65]: model.score(y_model,y_test)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-65-2568603f82c5> in <module>()
+----> 1 model.score(y_model,y_test)
+
+~/python/lib/python3.6/site-packages/sklearn/base.py in score(self, X, y, sample_weight)
+    347         """
+    348         from .metrics import accuracy_score
+--> 349         return accuracy_score(y, self.predict(X), sample_weight=sample_weight)
+    350 
+    351 
+
+~/python/lib/python3.6/site-packages/sklearn/linear_model/base.py in predict(self, X)
+    322             Predicted class label per sample.
+    323         """
+--> 324         scores = self.decision_function(X)
+    325         if len(scores.shape) == 1:
+    326             indices = (scores > 0).astype(np.int)
+
+~/python/lib/python3.6/site-packages/sklearn/linear_model/base.py in decision_function(self, X)
+    298                                  "yet" % {'name': type(self).__name__})
+    299 
+--> 300         X = check_array(X, accept_sparse='csr')
+    301 
+    302         n_features = self.coef_.shape[1]
+
+~/python/lib/python3.6/site-packages/sklearn/utils/validation.py in check_array(array, accept_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, warn_on_dtype, estimator)
+    439                     "Reshape your data either using array.reshape(-1, 1) if "
+    440                     "your data has a single feature or array.reshape(1, -1) "
+--> 441                     "if it contains a single sample.".format(array))
+    442             array = np.atleast_2d(array)
+    443             # To ensure that array flags are maintained
+
+ValueError: Expected 2D array, got 1D array instead:
+array=[0 0 0 1 1 0 1 1 1 1 0 1 0 1 1 1 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 1 0 0 0 0 0
+ 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 0 1 0
+ 0 1 0 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 0 1 0 0 1 0 0 1 0 0 0 0 1 1 1 0 0 1 0
+ 1 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0 1 0 1 1 1 0 1
+ 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 1 0 0 1 0 0 0 0 0
+ 0 1 0 0 1 1 0 1 1 0 0 0 1 0 0 0 1 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 0 0 1 0 1
+ 1 0 0 0 0 1 0 0 0 1 1 1 0 0 1 1 1 0 0 1 0 0 1 0 1 0 0 1 0 0 0 0 0 1 1 0 0
+ 0 0 0 0 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 1 0 1 0 1 0 0 0 0 0 0 0 0 1 1 1].
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+
+In [66]: from sklearn import svm
+
+In [67]: model=svm.SVC()
+
+In [68]: model.fit(X_train,y_train)
+Out[68]: 
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+In [69]: y_model=model.predict(X_test)
+
+In [70]: accuracy_score(y_model,y_test)
+Out[70]: 0.7220338983050848
+
+In [71]: model=svm.SVC(kernel='rbf')
+
+In [72]: model.fit(X_train,y_train)
+Out[72]: 
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+In [73]: y_model=model.predict(X_test)
+
+In [74]: accuracy_score(y_model,y_test)
+Out[74]: 0.7220338983050848
+
+In [75]: data.head()
+Out[75]: 
+   survived  pclass   age  sibsp  parch     fare  C  Q  female  male  False  True
+0         0       3  22.0      1      0   7.2500  0  0       0     1      1     0
+1         1       1  38.0      1      0  71.2833  1  0       1     0      1     0
+2         1       3  26.0      0      0   7.9250  0  0       1     0      0     1
+3         1       1  35.0      1      0  53.1000  0  0       1     0      1     0
+4         0       3  35.0      0      0   8.0500  0  0       0     1      0     1
+
+In [76]: data.isnull().any()
+Out[76]: 
+survived    False
+pclass      False
+age          True
+sibsp       False
+parch       False
+fare        False
+C           False
+Q           False
+female      False
+male        False
+False       False
+True        False
+dtype: bool
+
+In [77]: data1=data.copy()
+
+In [78]: data1.dropna(inplace=True)
+
+In [79]: data1.head()
+Out[79]: 
+   survived  pclass   age  sibsp  parch     fare  C  Q  female  male  False  True
+0         0       3  22.0      1      0   7.2500  0  0       0     1      1     0
+1         1       1  38.0      1      0  71.2833  1  0       1     0      1     0
+2         1       3  26.0      0      0   7.9250  0  0       1     0      0     1
+3         1       1  35.0      1      0  53.1000  0  0       1     0      1     0
+4         0       3  35.0      0      0   8.0500  0  0       0     1      0     1
+
+In [80]: data1.isnull().sum()
+Out[80]: 
+survived    0
+pclass      0
+age         0
+sibsp       0
+parch       0
+fare        0
+C           0
+Q           0
+female      0
+male        0
+False       0
+True        0
+dtype: int64
+
+In [81]: data1.shape
+Out[81]: (714, 12)
+
+In [82]: X_train,X_test,y_train,y_test=train_test_split()
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-82-d0ba4fa7aca2> in <module>()
+----> 1 X_train,X_test,y_train,y_test=train_test_split()
+
+~/python/lib/python3.6/site-packages/sklearn/model_selection/_split.py in train_test_split(*arrays, **options)
+   2008     n_arrays = len(arrays)
+   2009     if n_arrays == 0:
+-> 2010         raise ValueError("At least one array required as input")
+   2011     test_size = options.pop('test_size', 'default')
+   2012     train_size = options.pop('train_size', None)
+
+ValueError: At least one array required as input
+
+In [83]: X=data1.drop('survived',axis=1)
+
+In [84]: y=data1['survived']
+
+In [85]: X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=0,test_size=0.2)
+
+In [86]: model=LogisticRegression()
+
+In [87]: model.fit(X_train,y_train)
+Out[87]: 
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+
+In [88]: model.fit(X_train,y_train,max_iter=500)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-88-0815dda60ca5> in <module>()
+----> 1 model.fit(X_train,y_train,max_iter=500)
+
+TypeError: fit() got an unexpected keyword argument 'max_iter'
+
+In [89]: model.fit(X_train,y_train)
+Out[89]: 
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+
+In [90]: model=LogisticRegression(max_iter=500)
+
+In [91]: model.fit(X_train,y_train)
+Out[91]: 
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=500, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+
+In [92]: y_model=model.predict(X_test)
+
+In [93]: accuracy_score(y_model,y_test)
+Out[93]: 0.8111888111888111
+
+In [94]: model=LogisticRegression(max_iter=100)
+
+In [95]: model.fit(X_train,y_train)
+Out[95]: 
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+
+In [96]: y_model=model.predict(X_test)
+
+In [97]: accuracy_score(y_model,y_test)
+Out[97]: 0.8111888111888111
+
+In [98]: with open('Desktop/titanic_classifier','wb') as f:
+    ...:     pickle.dum(model,f)
+    ...:     
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-98-45faf6bfa4bc> in <module>()
+      1 with open('Desktop/titanic_classifier','wb') as f:
+----> 2     pickle.dum(model,f)
+      3 
+
+AttributeError: module 'pickle' has no attribute 'dum'
+
+In [99]: with open('Desktop/titanic_classifier','wb') as f:
+    ...:     pickle.dump(model,f)
+    ...:     
+    ...:     
+
+In [100]: 
+
